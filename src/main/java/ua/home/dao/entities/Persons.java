@@ -1,7 +1,6 @@
 package ua.home.dao.entities;
 
 import javax.persistence.*;
-import java.util.List;
 
 /**
  * Created by xnx_ on 05.02.2017.
@@ -16,10 +15,10 @@ public class Persons {
     @Column(name="fio")
     private String fio;
 
-    @OneToMany(cascade=CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name="addresses_id")
 
-    private List<Addresses> addresses;
+    private Addresses addresses;
 
     public Persons() {
         this.id = System.currentTimeMillis();
@@ -33,11 +32,11 @@ public class Persons {
         this.id = id;
     }
 
-    public List<Addresses> getAddresses() {
+    public Addresses getAddresses() {
         return addresses;
     }
 
-    public void setAddresses(List<Addresses> addresses) {
+    public void setAddresses(Addresses addresses) {
         this.addresses = addresses;
     }
 

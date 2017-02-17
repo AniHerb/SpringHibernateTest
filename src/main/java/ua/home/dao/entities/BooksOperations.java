@@ -15,6 +15,17 @@ public class BooksOperations {
     @Column(name = "id")
     private Long id;
 
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+
+    @Column(name = "count")
+    private Integer count;
+
     @OneToOne
     @JoinColumn(name = "operation_id", referencedColumnName = "id", nullable = false)
     private OperatonType operatonType;

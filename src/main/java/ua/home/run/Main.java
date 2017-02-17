@@ -23,7 +23,6 @@ public class Main {
 
         System.out.println("We started!!!!");
 //
-
         Service service = ctx.getBean(Service.class);
         rootLogger.info(service);
         Cities cities = service.select(Cities.class,"name","Rome").get(0);

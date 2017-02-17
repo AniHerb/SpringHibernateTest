@@ -13,9 +13,13 @@ public interface DAO {
     <T> void create(T t);
     <T> void update(T t);
     <T> void delete(T t);
-    <T> List<T> select(Class<T> tClass, Map<String,String> params);
+    <T,V> List<T> select(Class<T> tClass, Map<String,V> params);
 
     void dublicatecreate(Countries c);
+
+    <T,V> List<T> selectOrder(Class<T> booksOperationsClass, Map<String, V> parameters, boolean isAcc, String orderColumn);
+
+    <T,V> T selectMax(String date, Map<String, V> parameters, Class tClass);
 
 
     /*void createCity(Cities cities);

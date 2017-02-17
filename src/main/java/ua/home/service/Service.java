@@ -1,5 +1,7 @@
 package ua.home.service;
 
+import ua.home.dao.entities.BooksOperations;
+
 import java.util.List;
 
 /**
@@ -13,5 +15,9 @@ public interface Service {
 
     <T> void delete(T t);
 
-    <T> List<T> select(Class<T> t, String name,String value);
+    <T,V> List<T> select(Class<T> t, String name,V value);
+
+    void exceptionTest ();
+
+    void createBookOperation(BooksOperations operations);
 }

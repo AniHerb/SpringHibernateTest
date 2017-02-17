@@ -1,28 +1,34 @@
 package ua.home.configuration;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import ua.home.aspects.BeforeLogServiceMetgodAspects;
 import ua.home.dao.DAO;
 import ua.home.dao.DAOImpl;
 import ua.home.service.Service;
 import ua.home.service.ServiceImpl;
-//import ua.home.service.ServicesImpl;
 
 import javax.sql.DataSource;
 import java.util.Properties;
+
+//import ua.home.service.ServicesImpl;
 /**
  * Created by xnx_ on 07.02.2017.
  */
 @Configuration
 @EnableTransactionManagement
+@EnableAspectJAutoProxy
 @PropertySource(value = {"classpath:settings.properties"})
 public class BeanConfigurator {
     @Autowired
@@ -65,6 +71,11 @@ public class BeanConfigurator {
         properties.put("hibernate.hbm2ddl.auto", environment.getRequiredProperty("hibernate.hbm2ddl.auto"));
         return properties;
     }
+    @Bean
+    public Logger looger ()
+    {
+        return LogManager.getRootLogger();
+    }
 
     @Bean
     @Autowired
@@ -72,5 +83,10 @@ public class BeanConfigurator {
         HibernateTransactionManager txManager = new HibernateTransactionManager();
         txManager.setSessionFactory(s);
         return txManager;
+    }
+
+    @Bean
+    public BeforeLogServiceMetgodAspects newBeforeLogServiceMetgodAspects(){
+        return new BeforeLogServiceMetgodAspects();
     }
 }
