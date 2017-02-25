@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="2118679556">
-    <data-source source="LOCAL" name="MySQL - hibernate-hello@localhost" uuid="16fbc583-a175-42f0-ba75-d563d83f5c5d">
+  <component name="DataSourceManagerImpl" format="xml" hash="1993403259">
+    <data-source source="LOCAL" name="MySQL - hibernate-hello@localhost" uuid="6882ab14-c77b-431c-a724-ab88c2ab0265">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>

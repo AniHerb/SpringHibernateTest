@@ -63,6 +63,11 @@ public class BeanConfigurator {
         return dataSource;
     }
 
+    @Bean
+    public Generators newGenerators(){
+        return new Generators();
+    }
+
     private Properties hibernateProperties() {
         Properties properties = new Properties();
         properties.put("hibernate.dialect", environment.getRequiredProperty("hibernate.dialect"));

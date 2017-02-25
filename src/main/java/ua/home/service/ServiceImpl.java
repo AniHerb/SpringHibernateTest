@@ -6,6 +6,7 @@ import ua.home.dao.DAO;
 import ua.home.dao.entities.BooksOperations;
 import ua.home.dao.entities.OperatonType;
 import ua.home.dao.entities.Persons;
+import ua.home.exceprion.ApplicationException;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -51,13 +52,14 @@ public class ServiceImpl implements Service {
         if (operations == null) throw new IllegalStateException("Operation cannot be null");
         BooksOperations lastBooksOperations = getLastOperation(operations.getPersons());
         boolean isCanGiveBook = checkLastLastBookOperation(lastBooksOperations);
-        if (!isCanGiveBook) throw new RuntimeException("Cannot give book to person "+operations.getPersons().getFio()+" cause he did not return another book")
+        if (!isCanGiveBook) throw new ApplicationException("Cannot give book to person "+operations.getPersons().getFio()+" cause he did not return another book");
     }
 
     private boolean checkLastLastBookOperation(BooksOperations lastBooksOperations) {
-        if (lastBooksOperations.getOperatonType().getName().equals("inpute")) return false;
+        if (lastBooksOperations == null) return true;
+        if (lastBooksOperations.getOperatonType().getName().equals("inpute")) return true;
         else
-            return true;
+            return false;
     }
 
     private BooksOperations getLastOperation(Persons persons) {
@@ -65,6 +67,7 @@ public class ServiceImpl implements Service {
         parameters.put("persons",persons);
         List<BooksOperations> list =  dao.selectOrder(BooksOperations.class,parameters,
                 false,"date");
+        if (list.isEmpty()) return null;
         BooksOperations lastBooksOperations = list.get(0);
         return lastBooksOperations;
 

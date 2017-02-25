@@ -1,5 +1,7 @@
 package ua.home.dao.entities;
 
+import com.sun.istack.internal.NotNull;
+
 import javax.persistence.*;
 
 /**
@@ -14,6 +16,10 @@ public class Persons {
     private Long id;
     @Column(name="fio")
     private String fio;
+
+    @Column(name="identification",nullable = false)
+    @NotNull
+    private String identification;
 
     @OneToOne
     @JoinColumn(name="addresses_id")
@@ -48,6 +54,15 @@ public class Persons {
         this.fio = fio;
     }
 
+
+    public String getIdentification() {
+        return identification;
+    }
+
+    public void setIdentification(String identification) {
+        this.identification = identification;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -55,15 +70,11 @@ public class Persons {
 
         Persons persons = (Persons) o;
 
-        if ( id.equals(persons.id)) return true;
-        return false;
+        return identification.equals(persons.identification);
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (fio != null ? fio.hashCode() : 0);
-        result = 31 * result + (addresses != null ? addresses.hashCode() : 0);
-        return result;
+        return identification.hashCode();
     }
 }
