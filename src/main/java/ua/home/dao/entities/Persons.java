@@ -1,5 +1,6 @@
 package ua.home.dao.entities;
 
+import com.sun.istack.internal.Interned;
 import com.sun.istack.internal.NotNull;
 
 import javax.persistence.*;
@@ -23,7 +24,6 @@ public class Persons {
 
     @OneToOne
     @JoinColumn(name="addresses_id")
-
     private Addresses addresses;
 
     public Persons() {

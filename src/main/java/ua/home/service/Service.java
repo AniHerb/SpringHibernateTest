@@ -1,6 +1,7 @@
 package ua.home.service;
 
 import ua.home.dao.entities.BooksOperations;
+import ua.home.dao.entities.Persons;
 
 import java.util.List;
 
@@ -20,4 +21,6 @@ public interface Service {
     void exceptionTest ();
 
     void createBookOperation(BooksOperations operations);
+
+    void createPerson (Persons persons);
 }

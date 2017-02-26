@@ -1,8 +1,6 @@
 package ua.home.configuration;
 
-import ua.home.dao.entities.Cities;
-import ua.home.dao.entities.Countries;
-import ua.home.dao.entities.Streets;
+import ua.home.dao.entities.*;
 
 /**
  * Created by xnx_ on 23.02.2017.
@@ -26,6 +24,22 @@ public class Generators {
         s.setName("TestStreet");
         s.setCity(generateCities());
         return s;
+    }
+
+    public Addresses generateAddresses(){
+        Addresses addresses = new Addresses();
+        addresses.setFlatNumber("61");
+        addresses.setHouseNumber("2");
+        addresses.setStreets(generateStreets());
+        return addresses;
+    }
+
+    public Persons generatePersons (){
+        Persons persons = new Persons();
+        persons.setFio("Nazar");
+        persons.setIdentification("123456789");
+        persons.setAddresses(generateAddresses());
+        return persons;
     }
 
 

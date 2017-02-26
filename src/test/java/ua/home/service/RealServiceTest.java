@@ -51,6 +51,12 @@ public class RealServiceTest {
         service.createBookOperation(op);
     }
 
+    @Test
+    public void testIsPersonsCorrectAdd(){
+        service.createPerson(getPersons());
+    }
+
+
     private OperatonType getOperationType() {
         return service.select(OperatonType.class,"name","output").get(0);
     }

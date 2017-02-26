@@ -48,6 +48,32 @@ public class ServiceImpl implements Service {
         dao.create(operations);
     }
 
+    @Transactional
+    public void createPerson (Persons persons)
+    {
+        validatePetson(persons);
+        dao.create(persons);
+
+    }
+
+    private void validatePetson(Persons persons) {
+        if(persons == null) throw new ApplicationException("Person cannot be null");
+        boolean isCanCreatePerson = checkIsPersonCreatedNow(persons);
+        if(!isCanCreatePerson) throw new ApplicationException("Cannot create "+ persons +" , person was created");
+
+    }
+
+    private boolean checkIsPersonCreatedNow(Persons persons) {
+        Map<String,String> parametrs = new HashMap<>();
+        parametrs.put("fio",persons.getFio());
+        List<Persons> listPerson = dao.select(Persons.class,parametrs);
+        if(listPerson.isEmpty()) throw new ApplicationException("List Person is null");
+        for (Persons pers : listPerson){
+            if(persons.equals(pers)) return true;
+        }
+        return false;
+    }
+
     private void validateBookOperation(BooksOperations operations) {
         if (operations == null) throw new IllegalStateException("Operation cannot be null");
         BooksOperations lastBooksOperations = getLastOperation(operations.getPersons());
